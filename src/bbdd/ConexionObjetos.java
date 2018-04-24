@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import javax.swing.JComboBox;
 
@@ -140,9 +141,9 @@ public class ConexionObjetos {
 
 	}
 
-	public ArrayList<Venta> rellenaTablaVentas(String nif) {
+	public Vector<Venta> rellenaTablaVentas(String nif) {
 
-		ArrayList<Venta> datos = new ArrayList<Venta>();
+		Vector<Venta> datos = new Vector<Venta>();
 		
 		PreparedStatement enviaConsultaArticulosVentas;
 		String consultaPreparadaArticulosVentas = "Select nif, ventas.articulo, fabricantes.nombre, ventas.peso, ventas.categoria, ventas.fecha_venta, ventas.unidades_vendidas  from ventas, fabricantes where nif =? and ventas.cod_fabricante = fabricantes.cod_fabricante";

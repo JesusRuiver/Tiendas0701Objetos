@@ -178,13 +178,13 @@ public class Ejercicio1Objetos extends JFrame {
 
 	private void rellenaTablaArticulosVentasSeleccionandoNIF(DefaultTableModel modelo, String nif) {
 
-		ArrayList<Venta> filasVenta = new ArrayList<Venta>();
+		Vector<Venta> filasVenta = new Vector<Venta>();
 		
 		filasVenta = miConexion.rellenaTablaVentas("2222-A");
 
 		for (int i = 0; i < filasVenta.size(); i++) {
 						
-			modelo.addRow(filasVenta.get(i));
+			modelo.addRow(filasVenta);
 			
 		
 		}
