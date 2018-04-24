@@ -19,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
 
 import bbdd.ConexionObjetos;
 import bbdd.Tienda;
+import bbdd.Venta;
 
 public class Ejercicio1Objetos extends JFrame {
 
@@ -166,12 +167,12 @@ public class Ejercicio1Objetos extends JFrame {
 
 	private void rellenaTablaArticulosVentasSeleccionandoNIF(DefaultTableModel modelo, String nif) {
 
-		ArrayList<Object[]> datos = new ArrayList<Object[]>();
+		ArrayList<Venta[]> filasVenta = new ArrayList<Venta[]>();
 
-		datos = miConexion.rellenaTablaVentas(nif);
+		filasVenta = miConexion.rellenaTablaVentas(nif);
 
-		for (int i = 0; i < datos.size(); i++) {
-			modelo.addRow(datos.get(i));
+		for (int i = 0; i < filasVenta.size(); i++) {
+			modelo.addRow(filasVenta.get(i));
 		}
 	}
 

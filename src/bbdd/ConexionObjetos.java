@@ -28,11 +28,9 @@ public class ConexionObjetos {
 	private ResultSet resultado;
 	private Statement sentencia;
 
-	private PreparedStatement enviaConsultaArticulosVentas;
-	private String consultaPreparadaArticulosVentas = "Select * from ventas where nif=?";
+	
 
-	private PreparedStatement enviaConsultaArticulosPedidos;
-	private String consultaPreparadaArticulosPedidos = "Select * from pedidos where nif=?";
+	
 
 	public ConexionObjetos() {
 
@@ -142,9 +140,12 @@ public class ConexionObjetos {
 
 	}
 
-	public ArrayList<Object[]> rellenaTablaVentas(String nif) {
+	public ArrayList<Venta> rellenaTablaVentas(String nif) {
 
-		ArrayList<Object[]> datos = new ArrayList<Object[]>();
+		ArrayList<Venta[]> datos = new ArrayList<Venta[]>();
+		
+		PreparedStatement enviaConsultaArticulosVentas;
+		String consultaPreparadaArticulosVentas = "Select nif, fabricantes.nombre from ventas, fabricantes where nif =? and ventas.cod_fabricante = fabricantes.cod_fabricante";
 
 		try {
 
@@ -161,14 +162,18 @@ public class ConexionObjetos {
 		try {
 			while (resultado.next()) {
 
-				Object[] filas = new Object[7];
+				Venta [] filasVenta = new Venta[7];
+				
+				filasVenta [0] = resultado.getString(1);
+				filasVenta.setArticulo(resultado.getString(2));
+				filasVenta.setCodFabricante(resultado.getInt(3));
+				filasVenta.setPeso(resultado.getInt(4));
+				filasVenta.setCategoria(resultado.getString(5));
+				filasVenta.setFechaVenta(resultado.getString(6));
+				filasVenta.setUnidadesVendidas(resultado.getInt(7));
 
-				for (int i = 0; i < 7; i++) {
+				datos.add(filasVenta);
 
-					filas[i] = resultado.getObject(i + 1);
-
-				}
-				datos.add(filas);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -181,6 +186,9 @@ public class ConexionObjetos {
 	public ArrayList<Object[]> rellenaTablaPedidos(String nif) {
 
 		ArrayList<Object[]> datos = new ArrayList<Object[]>();
+		
+		PreparedStatement enviaConsultaArticulosPedidos;
+		String consultaPreparadaArticulosPedidos = "Select * from pedidos where nif=?";
 
 		try {
 
