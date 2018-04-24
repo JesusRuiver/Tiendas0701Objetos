@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JComboBox;
@@ -100,6 +101,16 @@ public class Ejercicio1Objetos extends JFrame {
 		// Primero rellenamos el comboBox de Tiendas con NIF
 
 		rellenaComboBox(cboxTiendas);
+		
+		DefaultTableModel modelo = construyeModeloTablaArticulosVentas(scrollPane);
+
+		modelo.setRowCount(0); // Borra lo que hay en la tabla
+		
+		String nif = null;
+		
+		rellenaTablaArticulosVentasSeleccionandoNIF(modelo, nif);
+		
+		
 
 		// Antes de accionar el combobox
 
@@ -167,12 +178,15 @@ public class Ejercicio1Objetos extends JFrame {
 
 	private void rellenaTablaArticulosVentasSeleccionandoNIF(DefaultTableModel modelo, String nif) {
 
-		ArrayList<Venta[]> filasVenta = new ArrayList<Venta[]>();
-
-		filasVenta = miConexion.rellenaTablaVentas(nif);
+		ArrayList<Venta> filasVenta = new ArrayList<Venta>();
+		
+		filasVenta = miConexion.rellenaTablaVentas("2222-A");
 
 		for (int i = 0; i < filasVenta.size(); i++) {
+						
 			modelo.addRow(filasVenta.get(i));
+			
+		
 		}
 	}
 

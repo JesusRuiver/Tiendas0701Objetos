@@ -142,11 +142,10 @@ public class ConexionObjetos {
 
 	public ArrayList<Venta> rellenaTablaVentas(String nif) {
 
-		ArrayList<Venta[]> datos = new ArrayList<Venta[]>();
+		ArrayList<Venta> datos = new ArrayList<Venta>();
 		
 		PreparedStatement enviaConsultaArticulosVentas;
-		String consultaPreparadaArticulosVentas = "Select nif, fabricantes.nombre from ventas, fabricantes where nif =? and ventas.cod_fabricante = fabricantes.cod_fabricante";
-
+		String consultaPreparadaArticulosVentas = "Select nif, ventas.articulo, fabricantes.nombre, ventas.peso, ventas.categoria, ventas.fecha_venta, ventas.unidades_vendidas  from ventas, fabricantes where nif =? and ventas.cod_fabricante = fabricantes.cod_fabricante";
 		try {
 
 			enviaConsultaArticulosVentas = conexion.prepareStatement(consultaPreparadaArticulosVentas);
@@ -162,17 +161,19 @@ public class ConexionObjetos {
 		try {
 			while (resultado.next()) {
 
-				Venta [] filasVenta = new Venta[7];
+				Venta filasVenta = new Venta();
 				
-				filasVenta [0] = resultado.getString(1);
+				filasVenta.setNif(resultado.getString(1));
 				filasVenta.setArticulo(resultado.getString(2));
-				filasVenta.setCodFabricante(resultado.getInt(3));
+				filasVenta.setCodFabricante(resultado.getString(3));
 				filasVenta.setPeso(resultado.getInt(4));
 				filasVenta.setCategoria(resultado.getString(5));
 				filasVenta.setFechaVenta(resultado.getString(6));
 				filasVenta.setUnidadesVendidas(resultado.getInt(7));
 
 				datos.add(filasVenta);
+				
+				System.out.println(filasVenta);
 
 			}
 		} catch (SQLException e) {

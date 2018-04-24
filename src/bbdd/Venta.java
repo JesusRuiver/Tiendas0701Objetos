@@ -6,7 +6,7 @@ public class Venta implements Serializable {
 
 	private String nif;
 	private String articulo;
-	private int codFabricante;
+	private String codFabricante;
 	private int peso;
 	private String categoria;
 	private String fechaVenta;
@@ -16,7 +16,7 @@ public class Venta implements Serializable {
 
 	}
 
-	public Venta(String nif, String articulo, int codFabricante, int peso, String categoria, String fechaVenta,
+	public Venta(String nif, String articulo, String codFabricante, int peso, String categoria, String fechaVenta,
 			int unidadesVendidas) {
 
 		this.nif = nif;
@@ -44,11 +44,11 @@ public class Venta implements Serializable {
 		this.articulo = articulo;
 	}
 
-	public int getCodFabricante() {
+	public String getCodFabricante() {
 		return codFabricante;
 	}
 
-	public void setCodFabricante(int codFabricante) {
+	public void setCodFabricante(String codFabricante) {
 		this.codFabricante = codFabricante;
 	}
 
@@ -83,13 +83,5 @@ public class Venta implements Serializable {
 	public void setUnidadesVendidas(int unidadesVendidas) {
 		this.unidadesVendidas = unidadesVendidas;
 	}
-
-	@Override
-	public String toString() {
-		return "Venta [nif=" + nif + ", articulo=" + articulo + ", codFabricante=" + codFabricante + ", peso=" + peso
-				+ ", categoria=" + categoria + ", fechaVenta=" + fechaVenta + ", unidadesVendidas=" + unidadesVendidas
-				+ "]";
-	}
-
 	
 }
