@@ -29,10 +29,6 @@ public class ConexionObjetos {
 	private ResultSet resultado;
 	private Statement sentencia;
 
-	
-
-	
-
 	public ConexionObjetos() {
 
 	}
@@ -143,8 +139,8 @@ public class ConexionObjetos {
 
 	public ArrayList<Venta> rellenaTablaVentas(String nif) {
 
-		ArrayList<Venta> datos = new ArrayList <Venta>();
-		
+		ArrayList<Venta> datos = new ArrayList<Venta>();
+
 		PreparedStatement enviaConsultaArticulosVentas;
 		String consultaPreparadaArticulosVentas = "Select nif, ventas.articulo, fabricantes.nombre, ventas.peso, ventas.categoria, ventas.fecha_venta, ventas.unidades_vendidas  from ventas, fabricantes where nif =? and ventas.cod_fabricante = fabricantes.cod_fabricante";
 		try {
@@ -163,7 +159,7 @@ public class ConexionObjetos {
 			while (resultado.next()) {
 
 				Venta filasVenta = new Venta();
-				
+
 				filasVenta.setNif(resultado.getString(1));
 				filasVenta.setArticulo(resultado.getString(2));
 				filasVenta.setCodFabricante(resultado.getString(3));
@@ -179,77 +175,6 @@ public class ConexionObjetos {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return datos;
-
-	}
-
-	public ArrayList<Object[]> rellenaTablaPedidos(String nif) {
-
-		ArrayList<Object[]> datos = new ArrayList<Object[]>();
-		
-		PreparedStatement enviaConsultaArticulosPedidos;
-		String consultaPreparadaArticulosPedidos = "Select * from pedidos where nif=?";
-
-		try {
-
-			enviaConsultaArticulosPedidos = conexion.prepareStatement(consultaPreparadaArticulosPedidos);
-			enviaConsultaArticulosPedidos.setString(1, nif);
-
-			resultado = enviaConsultaArticulosPedidos.executeQuery();
-
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		try {
-			while (resultado.next()) {
-
-				Object[] filas = new Object[7];
-
-				for (int i = 0; i < 7; i++) {
-
-					filas[i] = resultado.getObject(i + 1);
-
-				}
-				datos.add(filas);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return datos;
-
-	}
-
-	public ArrayList<Object[]> rellenaTablaPedidos() {
-		ArrayList<Object[]> datos = new ArrayList<Object[]>();
-		String consulta = "SELECT * FROM pedidos";
-
-		try {
-			resultado = sentencia.executeQuery(consulta);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		try {
-			while (resultado.next()) {
-
-				Object[] filas = new Object[7];
-
-				for (int i = 0; i < 7; i++) {
-
-					filas[i] = resultado.getObject(i + 1);
-
-				}
-				datos.add(filas);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
 		return datos;
 
 	}
