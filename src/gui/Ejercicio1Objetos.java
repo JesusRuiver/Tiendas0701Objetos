@@ -5,7 +5,6 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Vector;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JComboBox;
@@ -16,7 +15,6 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
 
 import bbdd.ConexionObjetos;
 import bbdd.Tienda;
@@ -101,9 +99,9 @@ public class Ejercicio1Objetos extends JFrame {
 		/*---------------------------------ACCIONES DE LOS BOTONES----------------------*/
 
 		rellenaComboBox(cboxTiendas);
-		
+
 		rbtnVentas.setSelected(true);
-		
+
 		cboxTiendas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
@@ -159,7 +157,8 @@ public class Ejercicio1Objetos extends JFrame {
 
 		datos = miConexion.rellenaTablaVentas(nif);
 
-		String matrizInfo[][] = new String[datos.size()][7];//matriz [fila] [columna]
+		String matrizInfo[][] = new String[datos.size()][7];// matriz [fila]
+															// [columna]
 
 		for (int i = 0; i < datos.size(); i++) {
 
