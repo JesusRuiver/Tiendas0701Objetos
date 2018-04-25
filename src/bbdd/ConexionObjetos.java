@@ -141,9 +141,9 @@ public class ConexionObjetos {
 
 	}
 
-	public Vector<Venta> rellenaTablaVentas(String nif) {
+	public ArrayList<Venta> rellenaTablaVentas(String nif) {
 
-		Vector<Venta> datos = new Vector<Venta>();
+		ArrayList<Venta> datos = new ArrayList <Venta>();
 		
 		PreparedStatement enviaConsultaArticulosVentas;
 		String consultaPreparadaArticulosVentas = "Select nif, ventas.articulo, fabricantes.nombre, ventas.peso, ventas.categoria, ventas.fecha_venta, ventas.unidades_vendidas  from ventas, fabricantes where nif =? and ventas.cod_fabricante = fabricantes.cod_fabricante";
@@ -173,8 +173,6 @@ public class ConexionObjetos {
 				filasVenta.setUnidadesVendidas(resultado.getInt(7));
 
 				datos.add(filasVenta);
-				
-				System.out.println(filasVenta);
 
 			}
 		} catch (SQLException e) {

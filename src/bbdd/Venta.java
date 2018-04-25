@@ -83,12 +83,5 @@ public class Venta implements Serializable {
 	public void setUnidadesVendidas(int unidadesVendidas) {
 		this.unidadesVendidas = unidadesVendidas;
 	}
-
-	@Override
-	public String toString() {
-		return "Venta [nif=" + nif + ", articulo=" + articulo + ", codFabricante=" + codFabricante + ", peso=" + peso
-				+ ", categoria=" + categoria + ", fechaVenta=" + fechaVenta + ", unidadesVendidas=" + unidadesVendidas
-				+ "]";
-	}
 	
 }
