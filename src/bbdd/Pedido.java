@@ -6,7 +6,7 @@ public class Pedido implements Serializable {
 
 	private String nif;
 	private String nombreArticulo;
-	private int codFabricante;
+	private String codFabricante;
 	private int peso;
 	private String categoria;
 	private String fechaPedido;
@@ -16,7 +16,7 @@ public class Pedido implements Serializable {
 
 	}
 
-	public Pedido(String nif, String nombreArticulo, int codFabricante, int peso, String categoria, String fechaPedido,
+	public Pedido(String nif, String nombreArticulo, String codFabricante, int peso, String categoria, String fechaPedido,
 			int unidadesPedidas) {
 
 		this.nif = nif;
@@ -44,11 +44,11 @@ public class Pedido implements Serializable {
 		this.nombreArticulo = nombreArticulo;
 	}
 
-	public int getCodFabricante() {
+	public String getCodFabricante() {
 		return codFabricante;
 	}
 
-	public void setCodFabricante(int codFabricante) {
+	public void setCodFabricante(String codFabricante) {
 		this.codFabricante = codFabricante;
 	}
 

@@ -107,13 +107,20 @@ public class ConexionObjetos {
 	}
 
 	public ArrayList<Articulo> rellenaComboBoxArticulos() {
-		
+
 		ArrayList<Articulo> listaArticulos = new ArrayList<Articulo>();
-		
-		PreparedStatement consultaPreparadaArticulosFabricates; //Todavia no lo utilizamos porque faltaria introducir en la sentencia el nif de la tiendas
-		
+
+		PreparedStatement consultaPreparadaArticulosFabricates; // Todavia no lo
+																// utilizamos
+																// porque
+																// faltaria
+																// introducir en
+																// la sentencia
+																// el nif de la
+																// tiendas
+
 		String consulta = "Select articulos.articulo, fabricantes.nombre from articulos, fabricantes where articulos.cod_fabricante = fabricantes.cod_fabricante";
-		
+
 		try {
 			resultado = this.sentencia.executeQuery(consulta);
 			System.out.println("Correcto");
@@ -126,11 +133,10 @@ public class ConexionObjetos {
 			while (resultado.next()) {
 
 				Articulo articulo = new Articulo();
-				
+
 				articulo.setNombreArticulo(resultado.getString(1));
 				articulo.setCodFabricante(resultado.getString(2));
-				
-				
+
 				listaArticulos.add(articulo);
 			}
 			resultado.close();
@@ -181,6 +187,50 @@ public class ConexionObjetos {
 		}
 		return datos;
 
+	}
+
+	private ArrayList<Pedido> rellenaTablaPedidos(String nif) {
+
+		ArrayList<Pedido> datos = new ArrayList<Pedido>();
+
+		PreparedStatement enviaConsultaArticulosPedidos;
+
+		String consultaPreparadaArticulosPedido = "Select pedidos.nif, pedidos.articulo, fabricantes.nombre, pedidos.peso, pedidos.categoria, pedidos.fecha_pedido, pedidos.unidades_pedidas  from pedidos, fabricantes where nif =? and pedidos.cod_fabricante = fabricantes.cod_fabricante";
+
+		try {
+
+			enviaConsultaArticulosPedidos = conexion.prepareStatement(consultaPreparadaArticulosPedido);
+
+			enviaConsultaArticulosPedidos.setString(1, nif);
+
+			resultado = enviaConsultaArticulosPedidos.executeQuery();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		try {
+			while (resultado.next()) {
+
+				Pedido filasPedido = new Pedido();
+
+				filasPedido.setNif(resultado.getString(1));
+				filasPedido.setNombreArticulo(resultado.getString(2));
+				filasPedido.setCodFabricante(resultado.getString(3));
+				filasPedido.setPeso(resultado.getInt(4));
+				filasPedido.setCategoria(resultado.getString(5));
+				filasPedido.setFechaPedido(resultado.getString(6));
+				filasPedido.setUnidadesPedidas(resultado.getInt(7));
+
+				datos.add(filasPedido);
+
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return datos;
 	}
 
 	public String sumaPrecioCosto() {
