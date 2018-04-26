@@ -117,8 +117,8 @@ public class Ejercicio1Objetos extends JFrame {
 
 				if (rbtnVentas.isSelected() == true) {
 
-					construirTablaVentas(nif);
-
+					//construirTablaVentas(nif);
+					construirTablaPedidos(nif);
 				} else {
 
 					construirTablaPedidos(nif);
@@ -207,7 +207,7 @@ public class Ejercicio1Objetos extends JFrame {
 			matrinzInfo[i][3] = datos.get(i).getPeso() + "";
 			matrinzInfo[i][4] = datos.get(i).getCategoria();
 			matrinzInfo[i][5] = datos.get(i).getFechaPedido();
-			matrinzInfo[i][5] = datos.get(i).getUnidadesPedidas() + "";
+			matrinzInfo[i][6] = datos.get(i).getUnidadesPedidas() + "";
 			
 		}
 		
