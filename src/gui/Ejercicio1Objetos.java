@@ -196,7 +196,7 @@ public class Ejercicio1Objetos extends JFrame {
 		
 		datos = miConexion.rellenaTablaPedidos(nif);
 		
-		String matrinzInfo [] [] = new String [datos.size()][7];
+		String matrinzInfo [][] = new String [datos.size()][7];
 		
 		for (int i = 0; i < datos.size();i++){
 			
