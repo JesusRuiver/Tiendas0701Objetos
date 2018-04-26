@@ -224,7 +224,8 @@ public class ConexionObjetos {
 				filasPedido.setUnidadesPedidas(resultado.getInt(7));
 
 				datos.add(filasPedido);
-
+				
+				System.out.println(datos);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

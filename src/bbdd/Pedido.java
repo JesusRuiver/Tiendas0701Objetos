@@ -84,4 +84,12 @@ public class Pedido implements Serializable {
 		this.unidadesPedidas = unidadesPedidas;
 	}
 
+	@Override
+	public String toString() {
+		return "Pedido [nif=" + nif + ", nombreArticulo=" + nombreArticulo + ", codFabricante=" + codFabricante
+				+ ", peso=" + peso + ", categoria=" + categoria + ", fechaPedido=" + fechaPedido + ", unidadesPedidas="
+				+ unidadesPedidas + "]";
+	}
+
+	
 }
