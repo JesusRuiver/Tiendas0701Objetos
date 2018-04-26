@@ -189,7 +189,7 @@ public class ConexionObjetos {
 
 	}
 
-	private ArrayList<Pedido> rellenaTablaPedidos(String nif) {
+	public ArrayList<Pedido> rellenaTablaPedidos(String nif) {
 
 		ArrayList<Pedido> datos = new ArrayList<Pedido>();
 
