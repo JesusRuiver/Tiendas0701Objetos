@@ -106,10 +106,14 @@ public class ConexionObjetos {
 
 	}
 
-	public ArrayList<String> rellenaComboBoxArticulos() {
-
-		ArrayList<String> lista = new ArrayList<String>();
-		String consulta = "SELECT * FROM articulos";
+	public ArrayList<Articulo> rellenaComboBoxArticulos() {
+		
+		ArrayList<Articulo> listaArticulos = new ArrayList<Articulo>();
+		
+		PreparedStatement consultaPreparadaArticulosFabricates; //Todavia no lo utilizamos porque faltaria introducir en la sentencia el nif de la tiendas
+		
+		String consulta = "Select articulos.articulo, fabricantes.nombre from articulos, fabricantes where articulos.cod_fabricante = fabricantes.cod_fabricante";
+		
 		try {
 			resultado = this.sentencia.executeQuery(consulta);
 			System.out.println("Correcto");
@@ -121,13 +125,19 @@ public class ConexionObjetos {
 		try {
 			while (resultado.next()) {
 
-				lista.add("ARTICULO: " + resultado.getString(1) + " FABRICANTE: " + resultado.getString(2));
+				Articulo articulo = new Articulo();
+				
+				articulo.setNombreArticulo(resultado.getString(1));
+				articulo.setCodFabricante(resultado.getString(2));
+				
+				
+				listaArticulos.add(articulo);
 			}
 			resultado.close();
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		return lista;
+		return listaArticulos;
 
 	}
 

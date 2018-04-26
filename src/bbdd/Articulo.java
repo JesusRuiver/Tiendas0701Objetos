@@ -5,7 +5,9 @@ import java.io.Serializable;
 public class Articulo implements Serializable {
 
 	private String nombreArticulo;
-	private int codFabricante;
+	private String codFabricante; // Inicialmente lo declaro como iny pero al
+									// gace la consulta para que segun el
+									// CodFabricamen me de el nombreFabricante lo he tenido que cambiar a String
 	private int peso;
 	private String categoria;
 	private int precioVenta;
@@ -16,7 +18,7 @@ public class Articulo implements Serializable {
 
 	}
 
-	public Articulo(String nombreArticulo, int codFabricante, int peso, String categoria, int precioVenta,
+	public Articulo(String nombreArticulo, String codFabricante, int peso, String categoria, int precioVenta,
 			int precioCosto, int existencias) {
 
 		this.nombreArticulo = nombreArticulo;
@@ -36,11 +38,11 @@ public class Articulo implements Serializable {
 		this.nombreArticulo = nombreArticulo;
 	}
 
-	public int getCodFabricante() {
+	public String getCodFabricante() {
 		return codFabricante;
 	}
 
-	public void setCodFabricante(int codFabricante) {
+	public void setCodFabricante(String codFabricante) {
 		this.codFabricante = codFabricante;
 	}
 
@@ -82,6 +84,11 @@ public class Articulo implements Serializable {
 
 	public void setExistencias(int existencias) {
 		this.existencias = existencias;
+	}
+
+	@Override
+	public String toString() {
+		return "Articulo: " + getNombreArticulo() + " " + " Fabricante: " + getCodFabricante();
 	}
 
 }
