@@ -37,7 +37,6 @@ public class Ejercicio1Objetos extends JFrame {
 	private JRadioButton rbtnPedidos = new JRadioButton("Pedidos");
 
 	private ConexionObjetos miConexion = new ConexionObjetos();
-	
 
 	/**
 	 * Launch the application.
@@ -99,16 +98,35 @@ public class Ejercicio1Objetos extends JFrame {
 		scrollPaneVentas.setBounds(33, 127, 775, 353);
 		contentPane.add(scrollPaneVentas);
 
-		
 		scrollPanePedidos = new JScrollPane();
 		scrollPanePedidos.setBounds(33, 127, 775, 353);
 		contentPane.add(scrollPanePedidos);
-		
+
 		/*---------------------------------ACCIONES DE LOS BOTONES----------------------*/
 
 		rellenaComboBox(cboxTiendas);
 
 		rbtnVentas.setSelected(true);
+
+		rbtnVentas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				String nif = seleccionaNifComboTiendas();
+
+				construirTablaVentas(nif);
+
+			}
+		});
+
+		rbtnPedidos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				String nif = seleccionaNifComboTiendas();
+
+				construirTablaPedidos(nif);
+
+			}
+		});
 
 		cboxTiendas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -117,8 +135,8 @@ public class Ejercicio1Objetos extends JFrame {
 
 				if (rbtnVentas.isSelected() == true) {
 
-					//construirTablaVentas(nif);
-					construirTablaPedidos(nif);
+					construirTablaVentas(nif);
+
 				} else {
 
 					construirTablaPedidos(nif);
@@ -150,7 +168,8 @@ public class Ejercicio1Objetos extends JFrame {
 
 	private void construirTablaVentas(String nif) {
 
-		String titulosColumnas[] = { "NIF", "ARTICULO", "FABRICANTE", "PESO", "CATEGORIA", "FECHA VENTA", "UNIDADES VENDIDAS" };
+		String titulosColumnas[] = { "NIF", "ARTICULO", "FABRICANTE", "PESO", "CATEGORIA", "FECHA VENTA",
+				"UNIDADES VENDIDAS" };
 		String informacionTablaVentas[][] = obtenerDatosVentas(nif);
 
 		tablaVentas = new JTable(informacionTablaVentas, titulosColumnas);
@@ -183,24 +202,25 @@ public class Ejercicio1Objetos extends JFrame {
 
 	private void construirTablaPedidos(String nif) {
 
-		String titulosColumnas[] = { "NIF", "ARTICULO", "FABRICANTE", "PESO", "CATEGORIA", "FECHA PEDIDO", "UNIDADES PEDIDAS" };
+		String titulosColumnas[] = { "NIF", "ARTICULO", "FABRICANTE", "PESO", "CATEGORIA", "FECHA PEDIDO",
+				"UNIDADES PEDIDAS" };
 		String informacionTablaPedidos[][] = obtenerDatosPedidos(nif);
 
 		tablaPedidos = new JTable(informacionTablaPedidos, titulosColumnas);
 		scrollPanePedidos.setViewportView(tablaPedidos);
 
 	}
+
 	private String[][] obtenerDatosPedidos(String nif) {
-		
+
 		ArrayList<Pedido> datos = new ArrayList<Pedido>();
-		
+
 		datos = miConexion.rellenaTablaPedidos(nif);
-		
-		String matrinzInfo [][] = new String [datos.size()][7];
-		
-		for (int i = 0; i < datos.size();i++){
-			
-			
+
+		String matrinzInfo[][] = new String[datos.size()][7];
+
+		for (int i = 0; i < datos.size(); i++) {
+
 			matrinzInfo[i][0] = datos.get(i).getNif();
 			matrinzInfo[i][1] = datos.get(i).getNombreArticulo();
 			matrinzInfo[i][2] = datos.get(i).getCodFabricante();
@@ -208,11 +228,11 @@ public class Ejercicio1Objetos extends JFrame {
 			matrinzInfo[i][4] = datos.get(i).getCategoria();
 			matrinzInfo[i][5] = datos.get(i).getFechaPedido();
 			matrinzInfo[i][6] = datos.get(i).getUnidadesPedidas() + "";
-			
+
 		}
-		
+
 		return matrinzInfo;
-		
+
 	}
 
 	public void rellenaComboBox(JComboBox<Tienda> cboxTiendas) {

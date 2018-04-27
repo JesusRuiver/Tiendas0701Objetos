@@ -229,8 +229,7 @@ public class ConexionObjetos {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		System.out.println(datos);
+
 		return datos;
 	}
 
@@ -254,6 +253,8 @@ public class ConexionObjetos {
 
 	public String sumaPrecioVenta() {
 
+		//select sum(ventas.unidades_vendidas) from ventas where nif= '4141-B';
+		
 		String consulta = "Select SUM(precio_venta) as sumaVentas from articulos";
 		String total = "";
 		try {
