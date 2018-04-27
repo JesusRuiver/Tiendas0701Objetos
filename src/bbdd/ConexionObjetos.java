@@ -149,6 +149,9 @@ public class ConexionObjetos {
 
 	public ArrayList<Venta> rellenaTablaVentas(String nif) {
 
+		//Consulta para añadir el precio venta
+		//Select pedidos.nif, pedidos.articulo, fabricantes.nombre, pedidos.peso, pedidos.categoria, pedidos.fecha_pedido, pedidos.unidades_pedidas, articulos.precio_venta  from pedidos, fabricantes, articulos where nif ='3333-A' and pedidos.cod_fabricante = fabricantes.cod_fabricante;
+		
 		ArrayList<Venta> datos = new ArrayList<Venta>();
 
 		PreparedStatement enviaConsultaArticulosVentas;
