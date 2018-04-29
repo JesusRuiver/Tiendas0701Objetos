@@ -113,8 +113,6 @@ public class Ejercicio1Objetos extends JFrame {
 
 				String nif = seleccionaNifComboTiendas();
 
-				tablaVentas.removeAll();
-
 				construirTablaVentas(nif);
 
 			}
@@ -124,8 +122,6 @@ public class Ejercicio1Objetos extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 
 				String nif = seleccionaNifComboTiendas();
-
-				tablaPedidos.removeAll();
 
 				construirTablaPedidos(nif);
 
@@ -209,7 +205,7 @@ public class Ejercicio1Objetos extends JFrame {
 	private void construirTablaPedidos(String nif) {
 
 		String titulosColumnas[] = { "NIF", "ARTICULO", "FABRICANTE", "PESO", "CATEGORIA", "FECHA PEDIDO",
-				"UNIDADES PEDIDAS" };
+				"UNIDADES PEDIDAS", "PRECIO COSTO", "TOTAL PEDIDOS" };
 		String informacionTablaPedidos[][] = obtenerDatosPedidos(nif);
 
 		tablaPedidos = new JTable(informacionTablaPedidos, titulosColumnas);
@@ -223,7 +219,7 @@ public class Ejercicio1Objetos extends JFrame {
 
 		datos = miConexion.rellenaTablaPedidos(nif);
 
-		String matrinzInfo[][] = new String[datos.size()][7];
+		String matrinzInfo[][] = new String[datos.size()][9];
 
 		for (int i = 0; i < datos.size(); i++) {
 
@@ -234,6 +230,9 @@ public class Ejercicio1Objetos extends JFrame {
 			matrinzInfo[i][4] = datos.get(i).getCategoria();
 			matrinzInfo[i][5] = datos.get(i).getFechaPedido();
 			matrinzInfo[i][6] = datos.get(i).getUnidadesPedidas() + "";
+			matrinzInfo[i][7] = datos.get(i).getPrecioCosto() + "";
+			matrinzInfo[i][8] = datos.get(i).getTotalUnidadesPedidas() + "";
+			
 
 		}
 

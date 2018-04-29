@@ -149,15 +149,11 @@ public class ConexionObjetos {
 
 	public ArrayList<Venta> rellenaTablaVentas(String nif) {
 
-		//Consulta para añadir el precio venta
-		//Select pedidos.nif, pedidos.articulo, fabricantes.nombre, pedidos.peso, pedidos.categoria, pedidos.fecha_pedido, pedidos.unidades_pedidas, articulos.precio_venta  from pedidos, fabricantes, articulos where nif ='3333-A' and pedidos.cod_fabricante = fabricantes.cod_fabricante;
-		
 		ArrayList<Venta> datos = new ArrayList<Venta>();
 
 		PreparedStatement enviaConsultaArticulosVentas;
-		String consultaPreparadaArticulosVentas = "select ventas.nif, ventas.articulo, fabricantes.nombre, ventas.peso, ventas.categoria, ventas.fecha_venta, ventas.unidades_vendidas as 'Unidades Vendidas', articulos.precio_venta, (ventas.unidades_vendidas * articulos.precio_venta) as 'Total Ventas' from ventas, fabricantes, articulos where nif=? and ventas.cod_fabricante = fabricantes.cod_fabricante";
-		//String consultaPreparadaArticulosVentas = "select ventas.nif, ventas.articulo, fabricantes.nombre, ventas.peso, ventas.categoria, ventas.fecha_venta, ventas.unidades_vendidas, articulos.precio_venta, (ventas.unidades_vendidas * articulos.precio_venta) as 'Total Ventas' from ventas, fabricantes, articulos where nif=? and ventas.cod_fabricante = fabricantes.cod_fabricante"; 
-		//String consultaPreparadaArticulosVentas = "Select nif, ventas.articulo, fabricantes.nombre, ventas.peso, ventas.categoria, ventas.fecha_venta, ventas.unidades_vendidas  from ventas, fabricantes where nif =? and ventas.cod_fabricante = fabricantes.cod_fabricante";
+		String consultaPreparadaArticulosVentas = "select ventas.nif, ventas.articulo, fabricantes.nombre, ventas.peso, ventas.categoria, ventas.fecha_venta, ventas.unidades_vendidas as 'Unidades Vendidas', articulos.precio_venta, (ventas.unidades_vendidas * articulos.precio_venta) as 'Total Uds. Ventas' from ventas, fabricantes, articulos where nif=? and ventas.cod_fabricante = fabricantes.cod_fabricante and ventas.categoria = articulos.categoria";
+
 		try {
 
 			enviaConsultaArticulosVentas = conexion.prepareStatement(consultaPreparadaArticulosVentas);
@@ -183,8 +179,8 @@ public class ConexionObjetos {
 				filasVenta.setFechaVenta(resultado.getString(6));
 				filasVenta.setUnidadesVendidas(resultado.getInt(7));
 				filasVenta.setPrecioVenta(resultado.getInt(8));
-				
-				filasVenta.setTotalUnidadesVendidas(resultado.getInt("Total Ventas"));
+
+				filasVenta.setTotalUnidadesVendidas(resultado.getInt("Total Uds. Ventas"));
 
 				datos.add(filasVenta);
 
@@ -203,7 +199,7 @@ public class ConexionObjetos {
 
 		PreparedStatement enviaConsultaArticulosPedidos;
 
-		String consultaPreparadaArticulosPedido = "Select pedidos.nif, pedidos.articulo, fabricantes.nombre, pedidos.peso, pedidos.categoria, pedidos.fecha_pedido, pedidos.unidades_pedidas  from pedidos, fabricantes where nif =? and pedidos.cod_fabricante = fabricantes.cod_fabricante";
+		String consultaPreparadaArticulosPedido = "select pedidos.nif, pedidos.articulo, fabricantes.nombre, pedidos.peso, pedidos.categoria, pedidos.fecha_pedido, pedidos.unidades_pedidas as 'Unidades Pedidas', articulos.precio_costo, (pedidos.unidades_pedidas * articulos.precio_costo) as 'Total Uds. Pedidos' from pedidos, fabricantes, articulos where nif=? and pedidos.cod_fabricante = fabricantes.cod_fabricante and pedidos.categoria = articulos.categoria";
 
 		try {
 
@@ -230,8 +226,12 @@ public class ConexionObjetos {
 				filasPedido.setCategoria(resultado.getString(5));
 				filasPedido.setFechaPedido(resultado.getString(6));
 				filasPedido.setUnidadesPedidas(resultado.getInt(7));
+				filasPedido.setPrecioCosto(resultado.getInt(8));
+
+				filasPedido.setTotalUnidadesPedidas(resultado.getInt("Total Uds. Pedidos"));
 
 				datos.add(filasPedido);
+
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -261,8 +261,8 @@ public class ConexionObjetos {
 
 	public String sumaPrecioVenta() {
 
-		//select sum(ventas.unidades_vendidas) from ventas where nif= '4141-B';
-		
+		// select sum(ventas.unidades_vendidas) from ventas where nif= '4141-B';
+
 		String consulta = "Select SUM(precio_venta) as sumaVentas from articulos";
 		String total = "";
 		try {

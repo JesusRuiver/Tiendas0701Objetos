@@ -13,16 +13,17 @@ public class Articulo implements Serializable {
 	private int precioVenta;
 	private int precioCosto;
 	private int existencias;
-	
+
 	private int totalUnidadesVendidas;
+	private int totalUnidadesPedidas;
 
 	public Articulo() {
 
 	}
 
 	public Articulo(String nombreArticulo, String codFabricante, int peso, String categoria, int precioVenta,
-			int precioCosto, int existencias) {
-
+			int precioCosto, int existencias, int totalUnidadesVendidas, int totalUnidadesPedidas) {
+		super();
 		this.nombreArticulo = nombreArticulo;
 		this.codFabricante = codFabricante;
 		this.peso = peso;
@@ -30,6 +31,8 @@ public class Articulo implements Serializable {
 		this.precioVenta = precioVenta;
 		this.precioCosto = precioCosto;
 		this.existencias = existencias;
+		this.totalUnidadesVendidas = totalUnidadesVendidas;
+		this.totalUnidadesPedidas = totalUnidadesPedidas;
 	}
 
 	public String getNombreArticulo() {
@@ -88,13 +91,20 @@ public class Articulo implements Serializable {
 		this.existencias = existencias;
 	}
 
-	
 	public int getTotalUnidadesVendidas() {
 		return totalUnidadesVendidas;
 	}
 
 	public void setTotalUnidadesVendidas(int totalUnidadesVendidas) {
 		this.totalUnidadesVendidas = totalUnidadesVendidas;
+	}
+
+	public int getTotalUnidadesPedidas() {
+		return totalUnidadesPedidas;
+	}
+
+	public void setTotalUnidadesPedidas(int totalUnidadesPedidas) {
+		this.totalUnidadesPedidas = totalUnidadesPedidas;
 	}
 
 	@Override
