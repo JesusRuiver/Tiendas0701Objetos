@@ -2,7 +2,7 @@ package bbdd;
 
 import java.io.Serializable;
 
-public class Pedido implements Serializable {
+public class Pedido extends Articulo implements Serializable {
 
 	private String nif;
 	private String nombreArticulo;

@@ -155,7 +155,9 @@ public class ConexionObjetos {
 		ArrayList<Venta> datos = new ArrayList<Venta>();
 
 		PreparedStatement enviaConsultaArticulosVentas;
-		String consultaPreparadaArticulosVentas = "Select nif, ventas.articulo, fabricantes.nombre, ventas.peso, ventas.categoria, ventas.fecha_venta, ventas.unidades_vendidas  from ventas, fabricantes where nif =? and ventas.cod_fabricante = fabricantes.cod_fabricante";
+		String consultaPreparadaArticulosVentas = "select ventas.nif, ventas.articulo, fabricantes.nombre, ventas.peso, ventas.categoria, ventas.fecha_venta, ventas.unidades_vendidas as 'Unidades Vendidas', articulos.precio_venta, (ventas.unidades_vendidas * articulos.precio_venta) as 'Total Ventas' from ventas, fabricantes, articulos where nif=? and ventas.cod_fabricante = fabricantes.cod_fabricante";
+		//String consultaPreparadaArticulosVentas = "select ventas.nif, ventas.articulo, fabricantes.nombre, ventas.peso, ventas.categoria, ventas.fecha_venta, ventas.unidades_vendidas, articulos.precio_venta, (ventas.unidades_vendidas * articulos.precio_venta) as 'Total Ventas' from ventas, fabricantes, articulos where nif=? and ventas.cod_fabricante = fabricantes.cod_fabricante"; 
+		//String consultaPreparadaArticulosVentas = "Select nif, ventas.articulo, fabricantes.nombre, ventas.peso, ventas.categoria, ventas.fecha_venta, ventas.unidades_vendidas  from ventas, fabricantes where nif =? and ventas.cod_fabricante = fabricantes.cod_fabricante";
 		try {
 
 			enviaConsultaArticulosVentas = conexion.prepareStatement(consultaPreparadaArticulosVentas);
@@ -180,6 +182,9 @@ public class ConexionObjetos {
 				filasVenta.setCategoria(resultado.getString(5));
 				filasVenta.setFechaVenta(resultado.getString(6));
 				filasVenta.setUnidadesVendidas(resultado.getInt(7));
+				filasVenta.setPrecioVenta(resultado.getInt(8));
+				
+				filasVenta.setTotalUnidadesVendidas(resultado.getInt("Total Ventas"));
 
 				datos.add(filasVenta);
 

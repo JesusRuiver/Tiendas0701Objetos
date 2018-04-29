@@ -13,6 +13,8 @@ public class Articulo implements Serializable {
 	private int precioVenta;
 	private int precioCosto;
 	private int existencias;
+	
+	private int totalUnidadesVendidas;
 
 	public Articulo() {
 
@@ -84,6 +86,15 @@ public class Articulo implements Serializable {
 
 	public void setExistencias(int existencias) {
 		this.existencias = existencias;
+	}
+
+	
+	public int getTotalUnidadesVendidas() {
+		return totalUnidadesVendidas;
+	}
+
+	public void setTotalUnidadesVendidas(int totalUnidadesVendidas) {
+		this.totalUnidadesVendidas = totalUnidadesVendidas;
 	}
 
 	@Override
