@@ -27,8 +27,6 @@ public class Ejercicio2Objetos extends JFrame {
 	private JPanel contentPane;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 
-	private ArrayList<Object[]> datos = new ArrayList<Object[]>();
-
 	private ConexionObjetos miConexion = new ConexionObjetos();
 
 	/**
@@ -63,7 +61,7 @@ public class Ejercicio2Objetos extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JComboBox <Tienda> cboxTiendas = new JComboBox();
+		JComboBox<Tienda> cboxTiendas = new JComboBox();
 		cboxTiendas.setBounds(42, 28, 272, 23);
 		contentPane.add(cboxTiendas);
 
@@ -103,41 +101,11 @@ public class Ejercicio2Objetos extends JFrame {
 		rbtnVentas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				String nif = troceaNIF(cboxTiendas);
-
-				datos = miConexion.rellenaTablaVentas(nif);
-
-
-				btnExportarBinarioSecuencial.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-
-						try {
-							ObjectOutputStream fileout = miConexion.exportarFicheroBinario();
-
-							for (int i = 0; i < datos.size(); i++) {
-								
-								fileout.writeObject(datos.get(i));
-							}
-
-							fileout.close();
-
-						} catch (IOException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-
-					}
-				});
-
 			}
 		});
 
 		rbtnPedidos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				String nif = troceaNIF(cboxTiendas);
-
-				miConexion.rellenaTablaPedidos(nif);
 
 			}
 		});

@@ -1,6 +1,5 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.util.ArrayList;
 
@@ -20,6 +19,8 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListSelectionEvent;
 
 public class Ejercicio3Objetos extends JFrame {
 
@@ -64,6 +65,7 @@ public class Ejercicio3Objetos extends JFrame {
 		contentPane.add(scrollPane);
 
 		JList<Tienda> listTiendas = new JList();
+
 		scrollPane.setViewportView(listTiendas);
 
 		JComboBox cboxArticulos = new JComboBox();
@@ -108,8 +110,23 @@ public class Ejercicio3Objetos extends JFrame {
 		btnInsertarArticulo.setBounds(557, 327, 89, 23);
 		contentPane.add(btnInsertarArticulo);
 
-		rellenaLista(listTiendas);
+		rellenaListaTiendas(listTiendas);
 
+		rellenaComboBoxArticulos(cboxArticulos);
+
+		listTiendas.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				
+				String nif = listTiendas.getSelectedValue().getNif();
+
+			}
+		});
+
+	}
+
+	// ------------------------------------------METODOS-----------------------------------------//
+
+	private void rellenaComboBoxArticulos(JComboBox cboxArticulos) {
 		ArrayList<Articulo> articulos = new ArrayList<Articulo>();
 
 		articulos = miConexion.rellenaComboBoxArticulos();
@@ -118,10 +135,9 @@ public class Ejercicio3Objetos extends JFrame {
 
 			cboxArticulos.addItem(articulos.get(i));
 		}
-
 	}
 
-	private void rellenaLista(JList listTiendas) {
+	private void rellenaListaTiendas(JList listTiendas) {
 
 		DefaultListModel<Tienda> modeloLista = new DefaultListModel<Tienda>();
 
