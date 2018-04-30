@@ -152,7 +152,7 @@ public class ConexionObjetos {
 		ArrayList<Venta> datos = new ArrayList<Venta>();
 
 		PreparedStatement enviaConsultaArticulosVentas;
-		String consultaPreparadaArticulosVentas = "select ventas.nif, ventas.articulo, fabricantes.nombre, ventas.peso, ventas.categoria, ventas.fecha_venta, ventas.unidades_vendidas as 'Unidades Vendidas', articulos.precio_venta, (ventas.unidades_vendidas * articulos.precio_venta) as 'Total Uds. Ventas' from ventas, fabricantes, articulos where nif=? and ventas.cod_fabricante = fabricantes.cod_fabricante and ventas.categoria = articulos.categoria";
+		String consultaPreparadaArticulosVentas = "select v.nif, v.articulo, f.nombre, v.peso, v.categoria, v.fecha_venta, v.unidades_vendidas as 'Unidades Vendidas', a.precio_venta, (v.unidades_vendidas * a.precio_venta) as 'Total Uds. Ventas' from ventas v inner join articulos a on v.articulo = a.articulo and v.categoria = a.categoria, fabricantes f where nif=? and v.cod_fabricante = f.cod_fabricante";
 
 		try {
 
@@ -199,7 +199,7 @@ public class ConexionObjetos {
 
 		PreparedStatement enviaConsultaArticulosPedidos;
 
-		String consultaPreparadaArticulosPedido = "select pedidos.nif, pedidos.articulo, fabricantes.nombre, pedidos.peso, pedidos.categoria, pedidos.fecha_pedido, pedidos.unidades_pedidas as 'Unidades Pedidas', articulos.precio_costo, (pedidos.unidades_pedidas * articulos.precio_costo) as 'Total Uds. Pedidos' from pedidos, fabricantes, articulos where nif=? and pedidos.cod_fabricante = fabricantes.cod_fabricante and pedidos.categoria = articulos.categoria";
+		String consultaPreparadaArticulosPedido = "select p.nif, p.articulo, f.nombre, p.peso, p.categoria, p.fecha_pedido, p.unidades_pedidas, a.precio_costo, (p.unidades_pedidas * a.precio_costo) as 'Total Uds. Pedidos' from pedidos p inner join articulos a on p.articulo = a.articulo and p.categoria = a.categoria, fabricantes f where nif=? and p.cod_fabricante = f.cod_fabricante";
 
 		try {
 

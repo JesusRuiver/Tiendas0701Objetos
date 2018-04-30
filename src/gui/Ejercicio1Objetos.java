@@ -232,7 +232,6 @@ public class Ejercicio1Objetos extends JFrame {
 			matrinzInfo[i][6] = datos.get(i).getUnidadesPedidas() + "";
 			matrinzInfo[i][7] = datos.get(i).getPrecioCosto() + "";
 			matrinzInfo[i][8] = datos.get(i).getTotalUnidadesPedidas() + "";
-			
 
 		}
 
