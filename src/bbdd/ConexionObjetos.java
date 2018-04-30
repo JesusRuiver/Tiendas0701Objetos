@@ -152,7 +152,10 @@ public class ConexionObjetos {
 		ArrayList<Venta> datos = new ArrayList<Venta>();
 
 		PreparedStatement enviaConsultaArticulosVentas;
-		String consultaPreparadaArticulosVentas = "select v.nif, v.articulo, f.nombre, v.peso, v.categoria, v.fecha_venta, v.unidades_vendidas as 'Unidades Vendidas', a.precio_venta, (v.unidades_vendidas * a.precio_venta) as 'Total Uds. Ventas' from ventas v inner join articulos a on v.articulo = a.articulo and v.categoria = a.categoria, fabricantes f where nif=? and v.cod_fabricante = f.cod_fabricante";
+		String consultaPreparadaArticulosVentas = "select v.nif, v.articulo, f.nombre, v.peso, v.categoria, v.fecha_venta, "
+				+ "v.unidades_vendidas as 'Unidades Vendidas', a.precio_venta, (v.unidades_vendidas * a.precio_venta) as 'Total Uds. Ventas' "
+				+ "from ventas v inner join articulos a on v.articulo = a.articulo and v.categoria = a.categoria, fabricantes f "
+				+ "where nif=? and v.cod_fabricante = f.cod_fabricante";
 
 		try {
 
@@ -199,7 +202,10 @@ public class ConexionObjetos {
 
 		PreparedStatement enviaConsultaArticulosPedidos;
 
-		String consultaPreparadaArticulosPedido = "select p.nif, p.articulo, f.nombre, p.peso, p.categoria, p.fecha_pedido, p.unidades_pedidas, a.precio_costo, (p.unidades_pedidas * a.precio_costo) as 'Total Uds. Pedidos' from pedidos p inner join articulos a on p.articulo = a.articulo and p.categoria = a.categoria, fabricantes f where nif=? and p.cod_fabricante = f.cod_fabricante";
+		String consultaPreparadaArticulosPedido = "select p.nif, p.articulo, f.nombre, p.peso, p.categoria, p.fecha_pedido, "
+				+ "p.unidades_pedidas, a.precio_costo, (p.unidades_pedidas * a.precio_costo) as 'Total Uds. Pedidos' "
+				+ "from pedidos p inner join articulos a on p.articulo = a.articulo and p.categoria = a.categoria, fabricantes f "
+				+ "where nif=? and p.cod_fabricante = f.cod_fabricante";
 
 		try {
 
@@ -241,42 +247,63 @@ public class ConexionObjetos {
 		return datos;
 	}
 
-	public String sumaPrecioCosto() {
+	public String sumaPrecioCosto(String nif) {
 
-		String consulta = "Select SUM(precio_costo) as sumaPrecioCosto from articulos";
-		String total = "";
+		String totalPedidos = null;
+
+		PreparedStatement enviaConsultaSumaPedidos;
+
+		String consultaPreparadaSumaPedidos = "select sum(p.unidades_pedidas * a.precio_costo) as 'Total Uds. Pedidas' "
+				+ "from pedidos p inner join articulos a on p.articulo = a.articulo and p.categoria = a.categoria, fabricantes f "
+				+ "where nif=? and p.cod_fabricante = f.cod_fabricante;";
+
 		try {
-			resultado = sentencia.executeQuery(consulta);
+
+			enviaConsultaSumaPedidos = conexion.prepareStatement(consultaPreparadaSumaPedidos);
+			enviaConsultaSumaPedidos.setString(1, nif);
+
+			resultado = enviaConsultaSumaPedidos.executeQuery();
 
 			if (resultado.next()) {
-				total = resultado.getString("sumaPrecioCosto");
+
+				totalPedidos = resultado.getString("Total Uds. Pedidas");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		return total;
+		return totalPedidos;
 	}
 
-	public String sumaPrecioVenta() {
+	public String sumaPrecioVenta(String nif) {
 
-		// select sum(ventas.unidades_vendidas) from ventas where nif= '4141-B';
+		String totalVentas = "";
 
-		String consulta = "Select SUM(precio_venta) as sumaVentas from articulos";
-		String total = "";
+		PreparedStatement enviaConsultaSumaVentas;
+
+		String consultaPreparadaSumaVentas = "select sum(v.unidades_vendidas * a.precio_venta) as 'Total Uds. Vendidas' "
+				+ "from ventas v inner join articulos a on v.articulo = a.articulo and v.categoria = a.categoria, fabricantes f "
+				+ "where nif=? and v.cod_fabricante = f.cod_fabricante";
+
 		try {
+			enviaConsultaSumaVentas = conexion.prepareStatement(consultaPreparadaSumaVentas);
 
-			resultado = sentencia.executeQuery(consulta);
+			enviaConsultaSumaVentas.setString(1, nif);
+
+			resultado = enviaConsultaSumaVentas.executeQuery();
 
 			if (resultado.next()) {
-				total = resultado.getString("sumaVentas");
+				totalVentas = resultado.getString("Total Uds. Vendidas");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return total;
+
+		System.out.println(totalVentas);
+
+		return totalVentas;
 	}
 
 	public ObjectOutputStream exportarFicheroBinario() throws IOException {

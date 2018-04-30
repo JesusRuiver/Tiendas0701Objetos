@@ -65,7 +65,7 @@ public class Ejercicio1Objetos extends JFrame {
 		/*------------------------COMPONENTES DE LA VENTANA----------------------------*/
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 853, 586);
+		setBounds(100, 100, 892, 611);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -87,19 +87,19 @@ public class Ejercicio1Objetos extends JFrame {
 
 		JLabel lbTotal = new JLabel("Total:");
 		lbTotal.setFont(new Font("Arial", Font.BOLD, 15));
-		lbTotal.setBounds(330, 512, 46, 14);
+		lbTotal.setBounds(330, 528, 46, 14);
 		contentPane.add(lbTotal);
 		lbResultadoTotal.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		lbResultadoTotal.setBounds(378, 480, 351, 14);
+		lbResultadoTotal.setBounds(386, 521, 214, 26);
 		contentPane.add(lbResultadoTotal);
 
 		scrollPaneVentas = new JScrollPane();
-		scrollPaneVentas.setBounds(33, 127, 775, 353);
+		scrollPaneVentas.setBounds(33, 127, 801, 374);
 		contentPane.add(scrollPaneVentas);
 
 		scrollPanePedidos = new JScrollPane();
-		scrollPanePedidos.setBounds(33, 127, 775, 353);
+		scrollPanePedidos.setBounds(33, 127, 801, 374);
 		contentPane.add(scrollPanePedidos);
 
 		/*---------------------------------ACCIONES DE LOS BOTONES----------------------*/
@@ -108,12 +108,42 @@ public class Ejercicio1Objetos extends JFrame {
 
 		rbtnVentas.setSelected(true);
 
+		cboxTiendas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				String nif = seleccionaNifComboTiendas();
+
+				String resultadoTotalVentas = miConexion.sumaPrecioVenta(nif);
+
+				String resultadoTotalPedidos = miConexion.sumaPrecioCosto(nif);
+
+				if (rbtnVentas.isSelected() == true) {
+
+					construirTablaVentas(nif);
+
+					lbResultadoTotal.setText(resultadoTotalVentas + " € Ingresos Ventas");
+
+				} else {
+
+					construirTablaPedidos(nif);
+
+					lbResultadoTotal.setText(resultadoTotalPedidos + "€ Coste Pedidos");
+				}
+
+			}
+
+		});
+
 		rbtnVentas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
 				String nif = seleccionaNifComboTiendas();
 
+				String resultadoTotalVentas = miConexion.sumaPrecioVenta(nif);
+
 				construirTablaVentas(nif);
+
+				lbResultadoTotal.setText(resultadoTotalVentas + " € Ingresos Ventas");
 
 			}
 		});
@@ -123,27 +153,13 @@ public class Ejercicio1Objetos extends JFrame {
 
 				String nif = seleccionaNifComboTiendas();
 
+				String resultadoTotalPedidos = miConexion.sumaPrecioCosto(nif);
+
 				construirTablaPedidos(nif);
 
-			}
-		});
-
-		cboxTiendas.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-
-				String nif = seleccionaNifComboTiendas();
-
-				if (rbtnVentas.isSelected() == true) {
-
-					construirTablaVentas(nif);
-
-				} else {
-
-					construirTablaPedidos(nif);
-				}
+				lbResultadoTotal.setText(resultadoTotalPedidos + "€ Coste Pedidos");
 
 			}
-
 		});
 
 	}
