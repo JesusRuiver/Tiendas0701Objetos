@@ -108,32 +108,6 @@ public class Ejercicio1Objetos extends JFrame {
 
 		rbtnVentas.setSelected(true);
 
-		cboxTiendas.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-
-				String nif = seleccionaNifComboTiendas();
-
-				String resultadoTotalVentas = miConexion.sumaPrecioVenta(nif);
-
-				String resultadoTotalPedidos = miConexion.sumaPrecioCosto(nif);
-
-				if (rbtnVentas.isSelected() == true) {
-
-					construirTablaVentas(nif);
-
-					lbResultadoTotal.setText(resultadoTotalVentas + " € Ingresos Ventas");
-
-				} else {
-
-					construirTablaPedidos(nif);
-
-					lbResultadoTotal.setText(resultadoTotalPedidos + "€ Coste Pedidos");
-				}
-
-			}
-
-		});
-
 		rbtnVentas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
@@ -160,6 +134,34 @@ public class Ejercicio1Objetos extends JFrame {
 				lbResultadoTotal.setText(resultadoTotalPedidos + "€ Coste Pedidos");
 
 			}
+		});
+
+		cboxTiendas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				String nif = seleccionaNifComboTiendas();
+
+				String resultadoTotalVentas = miConexion.sumaPrecioVenta(nif);
+
+				String resultadoTotalPedidos = miConexion.sumaPrecioCosto(nif);
+
+				if (rbtnVentas.isSelected() == true) {
+
+					construirTablaVentas(nif);
+
+					lbResultadoTotal.setText(resultadoTotalVentas + " € Ingresos Ventas");
+
+				} else {
+
+					construirTablaPedidos(nif);
+
+					lbResultadoTotal.setText(resultadoTotalPedidos + "€ Coste Pedidos");
+
+					System.out.println("Esta seleccionando pedidos");
+				}
+
+			}
+
 		});
 
 	}

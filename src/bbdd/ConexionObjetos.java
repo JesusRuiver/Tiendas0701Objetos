@@ -110,16 +110,7 @@ public class ConexionObjetos {
 
 		ArrayList<Articulo> listaArticulos = new ArrayList<Articulo>();
 
-		PreparedStatement consultaPreparadaArticulosFabricates; // Todavia no lo
-																// utilizamos
-																// porque
-																// faltaria
-																// introducir en
-																// la sentencia
-																// el nif de la
-																// tiendas
-
-		String consulta = "Select articulos.articulo, fabricantes.nombre from articulos, fabricantes where articulos.cod_fabricante = fabricantes.cod_fabricante";
+		String consulta = "Select distinct articulos.articulo, fabricantes.nombre from articulos, fabricantes where articulos.cod_fabricante = fabricantes.cod_fabricante";
 
 		try {
 			resultado = this.sentencia.executeQuery(consulta);
@@ -300,8 +291,6 @@ public class ConexionObjetos {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		System.out.println(totalVentas);
 
 		return totalVentas;
 	}

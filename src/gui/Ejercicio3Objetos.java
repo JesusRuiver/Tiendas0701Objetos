@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.EventQueue;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -21,6 +22,8 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Ejercicio3Objetos extends JFrame {
 
@@ -69,6 +72,7 @@ public class Ejercicio3Objetos extends JFrame {
 		scrollPane.setViewportView(listTiendas);
 
 		JComboBox cboxArticulos = new JComboBox();
+
 		cboxArticulos.setBounds(379, 34, 267, 20);
 		contentPane.add(cboxArticulos);
 
@@ -91,19 +95,19 @@ public class Ejercicio3Objetos extends JFrame {
 		contentPane.add(textField_1);
 
 		JLabel lbPeso = new JLabel("Peso");
-		lbPeso.setBounds(447, 94, 46, 14);
+		lbPeso.setBounds(410, 94, 46, 14);
 		contentPane.add(lbPeso);
 
 		JLabel lbunidades = new JLabel("Unidades");
-		lbunidades.setBounds(447, 156, 46, 14);
+		lbunidades.setBounds(410, 156, 46, 14);
 		contentPane.add(lbunidades);
 
 		JLabel lbFecha = new JLabel("Fecha");
-		lbFecha.setBounds(447, 226, 46, 14);
+		lbFecha.setBounds(410, 226, 46, 14);
 		contentPane.add(lbFecha);
 
 		JLabel lbCategoria = new JLabel("Categoria");
-		lbCategoria.setBounds(445, 276, 64, 14);
+		lbCategoria.setBounds(410, 276, 64, 14);
 		contentPane.add(lbCategoria);
 
 		JButton btnInsertarArticulo = new JButton("Insertar");
@@ -116,8 +120,18 @@ public class Ejercicio3Objetos extends JFrame {
 
 		listTiendas.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
-				
+
 				String nif = listTiendas.getSelectedValue().getNif();
+
+			}
+		});
+
+		String informacionComboArticulos = cboxArticulos.getSelectedItem().toString();
+
+		cboxArticulos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				String informacionComboArticulos = cboxArticulos.getSelectedItem().toString();
 
 			}
 		});
