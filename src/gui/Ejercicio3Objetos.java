@@ -2,7 +2,6 @@ package gui;
 
 import java.awt.EventQueue;
 import java.util.ArrayList;
-import java.util.StringTokenizer;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
