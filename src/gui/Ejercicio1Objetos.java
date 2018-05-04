@@ -181,8 +181,15 @@ public class Ejercicio1Objetos extends JFrame {
 	/*-------------------------------------METODOS-----------------------------------*/
 
 	private String seleccionaNifComboTiendas() {
+		
+		Tienda t1 = new Tienda();
+		
+		t1 = (Tienda) cboxTiendas.getSelectedItem();
+		
+		return t1.getNif();
+		
 
-		String nif;
+		/*String nif;
 
 		String tiendaYnif;
 
@@ -192,7 +199,7 @@ public class Ejercicio1Objetos extends JFrame {
 
 		nif = parteNif[2];
 
-		return nif;
+		return nif;*/
 
 	}
 

@@ -98,6 +98,8 @@ public class Ejercicio2Objetos extends JFrame {
 
 		/*---------------------------------ACCIONES DE LOS BOTONES----------------------*/
 
+		rbtnVentas.setSelected(true);
+
 		rbtnVentas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
