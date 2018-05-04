@@ -66,9 +66,13 @@ public class ConexionObjetos {
 	public void cerrarConexion() {
 		try {
 			conexion.close();
+			
+			System.out.println("La conexión se ha cerrado correctamente");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			
+			System.out.println("Error al cerrar la conexión");
 		}
 	}
 

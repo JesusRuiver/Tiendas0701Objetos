@@ -20,6 +20,8 @@ import bbdd.ConexionObjetos;
 import bbdd.Pedido;
 import bbdd.Tienda;
 import bbdd.Venta;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class Ejercicio1Objetos extends JFrame {
 
@@ -162,6 +164,16 @@ public class Ejercicio1Objetos extends JFrame {
 
 			}
 
+		});
+
+		/* Al cerrar la ventana se cierra la conexión */
+
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+
+				miConexion.cerrarConexion();
+			}
 		});
 
 	}
