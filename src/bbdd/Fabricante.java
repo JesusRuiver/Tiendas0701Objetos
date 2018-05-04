@@ -54,8 +54,7 @@ public class Fabricante {
 
 	@Override
 	public String toString() {
-		return "Fabricante [codFabricante=" + codFabricante + ", nombre=" + nombre + ", pais=" + pais + ", articulos="
-				+ Arrays.toString(articulos) + "]";
+		return "Fabricante [codFabricante=" + codFabricante + ", nombre=" + nombre + ", pais=" + pais + "]";
 	}
 
 }
